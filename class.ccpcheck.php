@@ -2,7 +2,7 @@
 /**
  * This is a simple class that simulates the work of KZPMailClearing.exe
  * 
- * @version 20130508
+ * @version 1.0
  * @author  Petar Marinov <eng.petar.marinov@gmail.com> * 
  */
 
