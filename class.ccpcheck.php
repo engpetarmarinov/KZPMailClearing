@@ -165,8 +165,6 @@ class KZPMailClearing
 					unset($this->_array_emails[$key]);
 				}
 			}
-			unset($key);
-			unset($email);
 			//get duplicates
 			$this->_dublicated_emails = $this->_get_duplicates($this->_array_emails);
 			//unique
