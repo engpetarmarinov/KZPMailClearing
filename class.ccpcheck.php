@@ -3,7 +3,7 @@
  * This is a simple class that simulates the work of KZPMailClearing.exe
  * 
  * @version 1.0
- * @author  Petar Marinov <eng.petar.marinov@gmail.com> * 
+ * @author  Petar Marinov <eng.petar.marinov@gmail.com>
  */
 
 class KZPMailClearing
@@ -110,19 +110,19 @@ class KZPMailClearing
 		if(!$this->_email_hashes_url)
 			throw new Exception('Email hashes ULR is not set');
 		// create curl resource 
-        $ch = curl_init(); 
-        // set url
-        curl_setopt($ch, CURLOPT_URL, $this->_email_hashes_url);
+		$ch = curl_init(); 
+		// set url
+		curl_setopt($ch, CURLOPT_URL, $this->_email_hashes_url);
 		//return header
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
-        //return the transfer as a string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		//return the transfer as a string
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		//register a callback function which will process the headers
-        curl_setopt($ch, CURLOPT_HEADERFUNCTION, array(&$this,'_read_header'));
-        // $output contains the output string
-        $hashes = curl_exec($ch);
-        // close curl resource to free up system resources 
-        curl_close($ch);
+		curl_setopt($ch, CURLOPT_HEADERFUNCTION, array(&$this,'_read_header'));
+		// $output contains the output string
+		$hashes = curl_exec($ch);
+		// close curl resource to free up system resources 
+		curl_close($ch);
 		
 		$this->_array_hashes = explode("\n", $hashes);
 		foreach ($this->_array_hashes as &$hash){
@@ -137,23 +137,23 @@ class KZPMailClearing
 	 * @return type
 	 */
 	private function _read_header($ch, $header) {
-        //extracting example data: filename from header field Content-Disposition
-        $filename = $this->_extract_custom_header('Content-Disposition: attachment; filename="', '"\s?\n', $header);
+		//extracting example data: filename from header field Content-Disposition
+		$filename = $this->_extract_custom_header('Content-Disposition: attachment; filename="', '"\s?\n', $header);
 		//Content-Disposition:attachment; filename="07012013.txt"
-        if ($filename) {
-            $this->_filename = trim($filename);
-        }
-        return strlen($header);
-    }
+		if ($filename) {
+			$this->_filename = trim($filename);
+		}
+		return strlen($header);
+	}
 
-    private function _extract_custom_header($start,$end,$header) {
-        $pattern = '/'. $start .'(.*?)'. $end .'/';
-        if (preg_match($pattern, $header, $result)) {
-            return $result[1];
-        } else {
-            return false;
-        }
-    }
+	private function _extract_custom_header($start,$end,$header) {
+		$pattern = '/'. $start .'(.*?)'. $end .'/';
+		if (preg_match($pattern, $header, $result)) {
+			return $result[1];
+		} else {
+			return false;
+		}
+	}
 	
 	private function _prepare_emails_for_check(){
 		if(!empty($this->_array_emails)){
