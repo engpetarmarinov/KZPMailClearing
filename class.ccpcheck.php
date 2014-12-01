@@ -75,19 +75,15 @@ class KZPMailClearing
 				else{
 					$this->_valid_domains[] = $domain;
 				}
-				unset($domain_hash);
 			}
 			//check if the email is valid
 			$email_hash = md5($email);
 			if(in_array($email_hash,$this->_array_hashes)){
 				$this->_invalid_emails_kzp[$key] = $email;
 				continue;
-			}
-			unset($email_hash);
+			}			
 			$this->_valid_emails[$key] = $email;
-		}
-		unset($key);
-		unset($email);
+		}		
 	}
 	
 	/**
@@ -132,7 +128,6 @@ class KZPMailClearing
 		foreach ($this->_array_hashes as &$hash){
 			$hash = strtolower(trim($hash));
 		}
-		unset($hash);
 	}
 	
 	/**
